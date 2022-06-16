@@ -5,11 +5,11 @@ import me.adamatraore.InterventionManager.entity.Speaker;
 import me.adamatraore.InterventionManager.mapper.ISpeakerMapper;
 import me.adamatraore.InterventionManager.repository.SpeakerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class SpeakerController {
@@ -26,14 +26,14 @@ public class SpeakerController {
         return speakerMapper.mapListTo(speakers);
     }
 
-    @PostMapping("/speaker")
-    public String createSpeaker(@RequestBody Map<String, String> body) {
-        return "Succès";
+    @PostMapping(value = "/speaker", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String createSpeaker(@RequestBody Speaker body) {
+        return body.getFirstname();
     }
 
-    @PutMapping("/speaker")
-    public String updateSpeaker(@RequestBody Map<String, String> body) {
-        return "Succès";
+    @PutMapping(value = "/speaker", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String updateSpeaker(@RequestBody Speaker body) {
+        return body.getFirstname();
     }
 
     @GetMapping("/speakers-by-speech/{id}")

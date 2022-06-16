@@ -1,6 +1,8 @@
 package me.adamatraore.InterventionManager.entity;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 public class Assembly {
@@ -18,6 +20,18 @@ public class Assembly {
 
     @Column(name = "longi")
     private Float longi;
+
+    //une assemblée peut avoir un ou plusieurs orateurs
+    @OneToMany(mappedBy = "assembly")
+    private Set<Speaker> speakers = new LinkedHashSet<>();
+
+    public Set<Speaker> getSpeakers() {
+        return speakers;
+    }
+
+    public void setSpeakers(Set<Speaker> speakers) {
+        this.speakers = speakers;
+    }
 
     public int getId() {
         return id;
