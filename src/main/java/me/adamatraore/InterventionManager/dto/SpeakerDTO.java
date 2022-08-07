@@ -1,10 +1,15 @@
 package me.adamatraore.InterventionManager.dto;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class SpeakerDTO {
     private int id;
     private String firstname;
     private String lastname;
     private AssemblyDTO assembly;
+
+    private Set<SpeechDTO> speeches = new LinkedHashSet<>();
 
     public SpeakerDTO() {
     }
@@ -39,5 +44,13 @@ public class SpeakerDTO {
 
     public void setAssembly(AssemblyDTO assembly) {
         this.assembly = assembly;
+    }
+
+    public Set<SpeechDTO> getSpeeches() {
+        return speeches;
+    }
+
+    public void setSpeeches(Set<SpeechDTO> speeches) {
+        this.speeches = speeches;
     }
 }

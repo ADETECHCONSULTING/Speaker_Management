@@ -1,7 +1,5 @@
 package me.adamatraore.InterventionManager.dto;
 
-import javax.persistence.Column;
-
 public class AssemblyDTO {
 
     private int id;

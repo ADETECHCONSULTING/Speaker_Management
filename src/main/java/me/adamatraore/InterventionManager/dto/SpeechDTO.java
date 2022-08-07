@@ -1,12 +1,11 @@
 package me.adamatraore.InterventionManager.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
-public class ThemeDto implements Serializable {
+public class SpeechDTO implements Serializable {
     private Integer id;
     private String name;
+    private ThemeDTO theme;
 
     public Integer getId() {
         return id;
@@ -22,5 +21,13 @@ public class ThemeDto implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ThemeDTO getTheme() {
+        return theme;
+    }
+
+    public void setTheme(ThemeDTO theme) {
+        this.theme = theme;
     }
 }

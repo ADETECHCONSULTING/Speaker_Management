@@ -10,34 +10,37 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 public class SpeakerController {
-
     @Autowired
     private SpeakerRepository speakerRepository;
-
     @Autowired
     private ISpeakerMapper speakerMapper;
 
-    @GetMapping("/speakers")
+    @GetMapping("/speaker/all")
     public List<SpeakerDTO> getSpeakers() {
         List<Speaker> speakers = speakerRepository.findAll();
         return speakerMapper.mapListTo(speakers);
     }
 
     @PostMapping(value = "/speaker", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String createSpeaker(@RequestBody Speaker body) {
-        return body.getFirstname();
+    public void createSpeaker(@RequestBody Speaker body) {
+        speakerRepository.save(body);
     }
 
-    @PutMapping(value = "/speaker", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String updateSpeaker(@RequestBody Speaker body) {
-        return body.getFirstname();
+    @PutMapping(value = "/speaker")
+    public void updateSpeaker(@RequestBody Speaker body) {
+        speakerRepository.save(body);
     }
 
     @GetMapping("/speakers-by-speech/{id}")
     public List<SpeakerDTO> getSpeakersBySpeechId(@PathVariable Integer id) {
         return new ArrayList<>();
+    }
+
+    @DeleteMapping(value = "/speaker/{id}")
+    public void deleteSpeaker(@PathVariable Integer id) {
+        speakerRepository.deleteById(id);
     }
 }
