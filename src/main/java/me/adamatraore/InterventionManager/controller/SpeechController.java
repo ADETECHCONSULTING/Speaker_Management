@@ -2,6 +2,7 @@ package me.adamatraore.InterventionManager.controller;
 
 import me.adamatraore.InterventionManager.dto.HistorySpeechDTO;
 import me.adamatraore.InterventionManager.dto.SpeechDTO;
+import me.adamatraore.InterventionManager.entity.Assembly;
 import me.adamatraore.InterventionManager.entity.HistorySpeech;
 import me.adamatraore.InterventionManager.entity.Speech;
 import me.adamatraore.InterventionManager.mapper.IHistorySpeechMapper;
@@ -46,18 +47,19 @@ public class SpeechController {
     }
 
     @PostMapping(value = "/speech/history", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createSpeechHistory(@RequestBody HistorySpeech body) {
-        historySpeechRepository.save(body);
+    public void createSpeechHistory(@RequestBody HistorySpeechDTO body) {
+        HistorySpeech historySpeech = historySpeechMapper.mapFrom(body);
+        historySpeechRepository.save(historySpeech);
     }
 
     @PostMapping(value = "/speech", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createSpeech(@RequestBody Speech body) {
-        speechRepository.save(body);
+    public void createSpeech(@RequestBody SpeechDTO body) {
+        speechRepository.save(speechMapper.mapFrom(body));
     }
 
     @PutMapping(value = "/speech")
-    public void updateSpeech(@RequestBody Speech body) {
-        speechRepository.save(body);
+    public void updateSpeech(@RequestBody SpeechDTO body) {
+        speechRepository.save(speechMapper.mapFrom(body));
     }
 
     @DeleteMapping(value = "/speech/{id}")

@@ -4,21 +4,21 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class SpeakerDTO {
-    private int id;
+    private Integer id;
     private String firstname;
     private String lastname;
-    private AssemblyDTO assembly;
+    private String assembly;
 
     private Set<SpeechDTO> speeches = new LinkedHashSet<>();
 
     public SpeakerDTO() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,11 +38,11 @@ public class SpeakerDTO {
         this.lastname = lastname;
     }
 
-    public AssemblyDTO getAssembly() {
+    public String getAssembly() {
         return assembly;
     }
 
-    public void setAssembly(AssemblyDTO assembly) {
+    public void setAssembly(String assembly) {
         this.assembly = assembly;
     }
 

@@ -13,9 +13,9 @@ import java.util.Set;
 public class Speaker {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private Long id;
+  private Integer id;
 
   @Column(name = "firstname")
   private String firstname;
@@ -35,11 +35,11 @@ public class Speaker {
           inverseJoinColumns = @JoinColumn(name = "speech_id"))
   private Set<Speech> speeches = new LinkedHashSet<>();
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

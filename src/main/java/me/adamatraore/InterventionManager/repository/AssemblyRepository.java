@@ -9,4 +9,6 @@ import java.util.List;
 public interface AssemblyRepository extends JpaRepository<Assembly, Integer> {
     @Override
     List<Assembly> findAll();
+
+    Assembly findFirstByName(String name);
 }

@@ -1,8 +1,10 @@
 package me.adamatraore.InterventionManager.controller;
 
 import me.adamatraore.InterventionManager.dto.SpeakerDTO;
+import me.adamatraore.InterventionManager.entity.Assembly;
 import me.adamatraore.InterventionManager.entity.Speaker;
 import me.adamatraore.InterventionManager.mapper.ISpeakerMapper;
+import me.adamatraore.InterventionManager.repository.AssemblyRepository;
 import me.adamatraore.InterventionManager.repository.SpeakerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,22 +18,34 @@ public class SpeakerController {
     @Autowired
     private SpeakerRepository speakerRepository;
     @Autowired
+    private AssemblyRepository assemblyRepository;
+    @Autowired
     private ISpeakerMapper speakerMapper;
 
     @GetMapping("/speaker/all")
     public List<SpeakerDTO> getSpeakers() {
-        List<Speaker> speakers = speakerRepository.findAll();
+        List<Speaker> speakers = speakerRepository.findAllByHistory();
         return speakerMapper.mapListTo(speakers);
     }
 
     @PostMapping(value = "/speaker", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createSpeaker(@RequestBody Speaker body) {
-        speakerRepository.save(body);
+    public void createSpeaker(@RequestBody SpeakerDTO body) {
+        Speaker speaker = speakerMapper.mapFrom(body);
+        Assembly assembly = assemblyRepository.findFirstByName(body.getAssembly());
+        if (assembly != null) {
+            speaker.setAssembly(assembly);
+        }
+        speakerRepository.save(speaker);
     }
 
     @PutMapping(value = "/speaker")
-    public void updateSpeaker(@RequestBody Speaker body) {
-        speakerRepository.save(body);
+    public void updateSpeaker(@RequestBody SpeakerDTO body) {
+        Speaker speaker = speakerMapper.mapFrom(body);
+        Assembly assembly = assemblyRepository.findFirstByName(body.getAssembly());
+        if (assembly != null) {
+            speaker.setAssembly(assembly);
+        }
+        speakerRepository.save(speaker);
     }
 
     @GetMapping("/speakers-by-speech/{id}")
